@@ -1,11 +1,16 @@
 from flask import Flask
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 app = Flask(__name__)
 
 
 @app.route("/")
 def hello():
-    return "<h1>Hei fra Flask!</h1><p>Servert fra mitt virtuelle miljø 🎉</p>"
+    message = os.getenv("APP_MESSAGE", "Hei fra Flask!")
+    return f"<h1>{message}</h1><p>Servert fra miljøvariabel 🎉</p>"
 
 
 if __name__ == "__main__":
